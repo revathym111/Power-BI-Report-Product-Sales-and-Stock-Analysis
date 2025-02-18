@@ -18,7 +18,8 @@ Visuals in the Report
   1. Quantity in Stock Per Product with Low Stock
 
       Visual Type: Bar Chart
-      Description: Displays the current stock quantity for each product, highlighting products with low stock (below a threshold of 25) for easy identification and timely restocking.
+      Description: Displays the current stock quantity for each product, highlighting products with low stock (below a threshold of 25) for 
+easy identification and timely restocking.
       Data Source: stock table, products table.
       SQL Query Example:
           SELECT p.product_id, p.name, s.quantity
@@ -84,5 +85,6 @@ How to Use This Report
   View the Total Sales Revenue card for a quick summary of overall sales performance.
 
 Conclusion
-  This Power BI report, integrated with PostgreSQL, provides critical insights into product sales and stock management. By leveraging SQL queries to extract and analyze data, it enables   efficient inventory management, sales strategy optimization, and overall business performance monitoring.
+  This Power BI report, integrated with PostgreSQL, provides critical insights into product sales and stock management. By leveraging SQL queries to extract and analyze data, it enables   efficient inventory management, sales strategy optimization, and overall business 
+performance monitoring.
 
