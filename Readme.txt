@@ -87,6 +87,6 @@ How to Use This Report
   View the Total Sales Revenue card for a quick summary of overall sales performance.
 
 Conclusion
-  This Power BI report, integrated with PostgreSQL, provides critical insights into product sales and stock management. By leveraging SQL queries to extract and analyze data, it enables   efficient inventory management, sales strategy optimization, and overall business 
-performance monitoring.
+  This Power BI report, integrated with PostgreSQL, provides critical insights into product sales and stock management. 
+By leveraging SQL queries to extract and analyze data, it enables   efficient inventory management, sales strategy optimization, and overall business performance monitoring.
 
