@@ -1,58 +1,88 @@
 Power BI Report: Product Sales and Stock Analysis
 
+Overview
 
-Overview:
-This Power BI report provides comprehensive insights into the sales and stock performance of products. It is designed to help users track inventory levels, identify top-selling products, and monitor total sales revenue. The visuals are structured to provide a clear view of product performance and stock management.
+  This Power BI report provides detailed insights into product sales and stock performance. It helps users track inventory levels, identify top-selling products, and monitor total sales revenue. The report is powered by PostgreSQL as the database, with queries executed to fetch relevant data for visualization and analysis. The visuals are structured to offer a clear view of product performance and inventory management.
 
-Visuals in the Report:
+Data Connection
+  This report is connected to a PostgreSQL database, where SQL queries were executed to retrieve and process data. 
+  Key queries include:
+    Fetching stock levels and identifying products with low stock.
+    Aggregating total sales per product to determine top-selling items.
+    Calculating stock distribution across product categories.
 
-1. Quantity in Stock Per Product with Low Stock:
-Visual Type: Bar Chart
-Description: This visualization displays the current stock quantity for each product. Products with low stock (below a defined threshold of 25) are highlighted for quick identification, helping the team to manage inventory and re-order products in a timely manner.
-Data Source: stock table and products table.
+Summing total revenue from sales transactions.
 
-2. Top Products Sold:
-Visual Type: Line Chart
-Description: This visual shows the top-selling products based on quantity sold. The products with the highest sales volume are ranked, providing a clear view of which items are driving sales.
-Data Source: sales table and products table.
-Metrics: Total quantity sold per product.
+Visuals in the Report
 
-3. Stock Quantity by Category:
-Visual Type: Pie Chart
-Description: This visualization breaks down the stock quantity by product category. It helps to understand the distribution of stock across various categories and identify which categories have more or less stock.
-Data Source: stock table, products table, and categories table.
-Metrics: Stock quantity for each category.
+  1. Quantity in Stock Per Product with Low Stock
 
-4. Total Sales Revenue:
-Visual Type: Gauge
-Description: This metric card shows the total sales revenue from all transactions, providing a quick summary of overall performance.
-Data Source: sales table.
-Metrics: Total sum of total_price from the sales data.
+      Visual Type: Bar Chart
+      Description: Displays the current stock quantity for each product, highlighting products with low stock (below a threshold of 25) for easy identification and timely restocking.
+      Data Source: stock table, products table.
+      SQL Query Example:
+          SELECT p.product_id, p.name, s.quantity
+          FROM stock s
+          JOIN products p ON s.product_id = p.product_id
+          WHERE s.quantity < 25;
 
+  2. Top Products Sold
 
-Data Model and Relationships:
-Tables Used:
-sales: Contains transaction details, including sale_id, product_id, quantity, sale_date, and total_price.
-stock: Tracks product stock levels with product_id, quantity, and last_updated timestamps.
-products: Contains product details such as product_id, name, description, price, and category_id.
-categories: Defines product categories, including category_id and category_name.
-Relationships:
-products table is related to sales via product_id.
-products table is related to stock via product_id.
-products table is related to categories via category_id.
+      Visual Type: Line Chart
+      Description: Ranks the top-selling products based on quantity sold, providing insights into sales trends.
+      Data Source: sales table, products table.
+      Metrics: Total quantity sold per product.
+      SQL Query Example:
+        SELECT p.name, SUM(s.quantity) AS total_sold
+        FROM sales s
+        JOIN products p ON s.product_id = p.product_id
+        GROUP BY p.name
+        ORDER BY total_sold DESC;
 
-Purpose and Use Cases:
-Inventory Management: Helps identify products with low stock levels to enable timely restocking decisions.
-Sales Analysis: Provides insights into the most popular products based on sales volume, helping to optimize product offerings.
-Revenue Tracking: Allows stakeholders to track the overall sales performance by displaying total sales revenue.
-Category Distribution: Provides visibility into stock distribution by category to understand product mix and demand.
+  3. Stock Quantity by Category
+      Visual Type: Pie Chart
+      Description: Displays the stock distribution across various product categories.
+      Data Source: stock table, products table, categories table.
+      Metrics: Stock quantity per category.
+      SQL Query Example:
+        SELECT c.category_name, SUM(s.quantity) AS total_stock
+        FROM stock s
+        JOIN products p ON s.product_id = p.product_id
+        JOIN categories c ON p.category_id = c.category_id
+        GROUP BY c.category_name;
 
-How to Use This Report:
-Use the Quantity in Stock Per Product with Low Stock bar chart to monitor stock levels across products and identify which items need restocking.
-Refer to the Top Products Sold chart to understand which products are performing well in terms of sales.
-Use the Stock Quantity by Category pie chart to gain insights into stock distribution across categories.
-View the Total Sales Revenue card to get a quick overview of overall sales performance.
+  4. Total Sales Revenue
+      Visual Type: Gauge
+      Description: Displays the total revenue from sales transactions, providing a quick summary of overall sales performance.
+      Data Source: sales table.
+      Metrics: Sum of total_price from sales data.
+      SQL Query Example:
+        SELECT SUM(total_price) AS total_revenue FROM sales;
 
+ Data Model and Relationships
+    Tables Used:
+        sales: Contains transaction details (sale_id, product_id, quantity, sale_date, total_price).
+        stock: Tracks product stock levels (product_id, quantity, last_updated).
+        products: Stores product details (product_id, name, description, price, category_id).
+        categories: Defines product categories (category_id, category_name).
 
-Conclusion:
-This Power BI report provides key insights into sales and stock performance, enabling better decision-making for inventory management, sales strategy, and overall product performance monitoring.
+  Relationships:
+      products table is related to sales via product_id.
+      products table is related to stock via product_id.
+      products table is related to categories via category_id.
+
+Purpose and Use Cases
+  Inventory Management: Identifies low-stock products to facilitate timely restocking.
+  Sales Analysis: Provides insights into top-selling products and sales trends.
+  Revenue Tracking: Allows stakeholders to monitor overall sales performance.
+  Category Distribution: Helps in understanding stock allocation across different categories.
+
+How to Use This Report
+  Use the Quantity in Stock Per Product with Low Stock chart to monitor stock levels and identify items needing restocking.
+  Refer to the Top Products Sold chart to understand product performance and sales trends.
+  Analyze the Stock Quantity by Category pie chart for insights into stock distribution across categories.
+  View the Total Sales Revenue card for a quick summary of overall sales performance.
+
+Conclusion
+  This Power BI report, integrated with PostgreSQL, provides critical insights into product sales and stock management. By leveraging SQL queries to extract and analyze data, it enables   efficient inventory management, sales strategy optimization, and overall business performance monitoring.
+
