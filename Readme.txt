@@ -3,7 +3,8 @@ Power BI Report: Product Sales and Stock Analysis
 Overview
 
   This Power BI report provides detailed insights into product sales and stock performance. It helps users track inventory levels, 
-identify top-selling products, and monitor total sales revenue. The report is powered by PostgreSQL as the database, with queries executed to fetch relevant data for visualization and analysis. The visuals are structured to offer a clear view of product performance and inventory management.
+identify top-selling products, and monitor total sales revenue. The report is powered by PostgreSQL as the database, with queries 
+executed to fetch relevant data for visualization and analysis. The visuals are structured to offer a clear view of product performance and inventory management.
 
 Data Connection
   This report is connected to a PostgreSQL database, where SQL queries were executed to retrieve and process data. 
